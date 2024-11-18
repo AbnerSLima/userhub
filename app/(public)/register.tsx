@@ -6,23 +6,41 @@ import { Link } from "expo-router";
 export default function Register(){
   const { isLoaded, setActive, signUp } = useSignUp();
 
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   
   async function handleSignUp(){
-    if(!isLoaded) return
-
-    try{
-      await signUp.create({
-        emailAddress: email,
-        password: password
-      })
-
-    }catch(e){
-      console.log(e);
+    if (!name || !email || !password) {
+      Alert.alert('Erro', 'Todos os campos são obrigatórios!');
+      return;
+    }
+  
+    try {
+      const response = await fetch('http://localhost:3000/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          nome: name,
+          login: email,
+          senha: password,
+        }),
+      });
+  
+      const data = await response.json();
+  
+      if (response.ok) {
+        Alert.alert('Sucesso', 'Conta criada com sucesso!');
+        // Redirecionar para a tela de login
+      } else {
+        Alert.alert('Erro', data.message || 'Não foi possível criar a conta.');
+      }
+    } catch (error) {
+      console.error(error);
+      Alert.alert('Erro', 'Algo deu errado. Tente novamente mais tarde.');
     }
 
-  };
+  }
 
   return(
     <View style={styles.container}>
@@ -31,6 +49,14 @@ export default function Register(){
           style={styles.userLogo}
       />
       <Text style={styles.title}>Criar conta</Text>
+      <TextInput
+        autoCapitalize="none"
+        placeholder="Digite seu primeiro nome..."
+        placeholderTextColor={"gray"}
+        style={styles.input}
+        value={name}
+        onChangeText={setName}
+      />
       <TextInput
         autoCapitalize="none"
         placeholder="Digite seu e-mail..."
