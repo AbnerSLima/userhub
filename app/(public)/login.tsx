@@ -1,7 +1,7 @@
 import { View, Text, TextInput, Button, Alert, Image, StyleSheet, Platform, SafeAreaView, Pressable } from "react-native";
 import { useSignIn } from "@clerk/clerk-expo";
 import { useState } from 'react';
-import { Link } from "expo-router";
+import { Link, router, useRouter } from "expo-router";
 
 export default function Login(){
   const [email, setEmail] = useState('');
@@ -9,10 +9,11 @@ export default function Login(){
   
   const handleLogin = () => {
   // Aqui você pode adicionar a lógica para autenticação
+  router.push('/home');
   Alert.alert('Login', `Email: ${email}\nSenha: ${password}`);
   };
   return(
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Image
           source={require('@/assets/images/logo1.png')}
           style={styles.userLogo}
@@ -50,7 +51,7 @@ export default function Login(){
           <Text>Ainda não tem conta? Cadastre-se!</Text>
         </Pressable>
       </Link>
-    </View>
+    </SafeAreaView>
   )
 }
 

@@ -5,6 +5,9 @@ const bodyParser = require('body-parser');
 const app = express();
 app.use(bodyParser.json());
 
+const cors = require('cors');
+app.use(cors());
+
 const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root', 
@@ -35,9 +38,6 @@ const PORT = 8081;
 app.listen(PORT, () => {
   console.log(`Servidor rodando na porta ${PORT}`);
 });
-
-const cors = require('cors');
-app.use(cors());
 
 connection.query("SELECT * FROM users", function (err, rows, fields) {
     if (!err) {

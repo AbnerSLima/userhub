@@ -14,10 +14,6 @@ export default function Register(){
     router.push('/home');
   };
 
-  const handleEdit = () => {
-    router.push('/edit');
-  }
-
   async function handleCreate(){
   }
 
@@ -35,7 +31,7 @@ export default function Register(){
         />
       </View>
       <View style={styles.container}>
-        <Text style={styles.title}>Dados do usuário</Text>
+        <Text style={styles.title}>Adicionar usuário</Text>
         <TextInput
           autoCapitalize="none"
           placeholder="Digite seu primeiro nome..."
@@ -62,9 +58,9 @@ export default function Register(){
           secureTextEntry
         />
         <Button
-          title="Editar"
-          color={"#FFC107"}
-          onPress={handleEdit}
+          title="Adicionar"
+          color={"#4CAF50"}
+          onPress={handleCreate}
         />
       </View>
     </SafeAreaView>

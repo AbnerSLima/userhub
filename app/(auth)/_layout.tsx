@@ -13,13 +13,25 @@ export default function StackPage() {
       <Stack.Screen
         name= "home"
         options={{
-          headerTitle: "Home" 
+          headerShown: false 
         }} 
       />
-            <Stack.Screen
+      <Stack.Screen
         name= "profile"
         options={{
-          headerTitle: "Minha Conta" 
+          headerShown: false 
+        }} 
+      />
+      <Stack.Screen
+        name= "create"
+        options={{
+          headerShown: false 
+        }} 
+      />
+      <Stack.Screen
+        name= "edit"
+        options={{
+          headerShown: false 
         }} 
       />
     </Stack>
