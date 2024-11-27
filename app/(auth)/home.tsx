@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, router, useRouter,Stack } from "expo-router";
-import { View, StyleSheet, Text, Image, TextInput, TouchableOpacity, Button } from 'react-native';
+import { View, StyleSheet, Text, Image, TextInput, TouchableOpacity, Button, Pressable, SafeAreaView } from 'react-native';
 
 export default function Home() {
   const usuarios = [
@@ -19,27 +19,48 @@ export default function Home() {
   const handleExcluir = (id: number) => {
     console.log(`Excluir usuário ID: ${id}`);
   };
+  const handleLogoff = () => {
+    router.push('/login');
+  };
 
   return(
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View style={[styles.button, styles.addButton]}>
-      <Image
-          source={require('@/assets/images/logo2.png')}
-          style={styles.userLogo}
-      />
-        <Button
-        title="Adicionar Usiário"
-        color={'#4CAF50'}
-        onPress={handleCreate}
-        />
+        <View>
+          <Image
+              source={require('@/assets/images/logo2.png')}
+              style={styles.userLogo}
+          />
+        </View>
+        <View>
+          <View style={styles.linkUser}>
+            <Text>
+              Olá Visitante!
+            </Text>
+            <Link href="/login" asChild>
+                <Pressable>
+                  <Text style={styles.linkLogoff}>Sair</Text>
+                </Pressable>
+            </Link>
+          </View>
+          <Button
+              title="Adicionar Usiário"
+              color={'#4CAF50'}
+              onPress={handleCreate}
+              />
+        </View>
       </View>
       <View style={styles.searchContainer}>
         <TextInput
-          style={styles.input}
           placeholder="Digite o nome ou email"
+          placeholderTextColor={"gray"}
+          style={styles.input}
         />
         <TouchableOpacity style={styles.searchButton}>
           <Text style={styles.searchButtonText}>Buscar</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.searchClean}>
+          <Text style={styles.searchCleanText}>Limpar filtro</Text>
         </TouchableOpacity>
       </View>
         <View>
@@ -77,7 +98,7 @@ export default function Home() {
             </View>
           ))}
         </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -93,11 +114,12 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
-    borderWidth: 1,
-    borderColor: '#ddd',
+    borderWidth: 2,
+    borderColor:'#49688d',
     borderRadius: 25,
     paddingHorizontal: 15,
     height: 40,
+    backgroundColor: '#fff',
   },
   searchButton: {
     flexDirection: 'row',
@@ -144,17 +166,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     flex: 2,
   },
-  button: {
-    padding: 5,
-    marginHorizontal: 2,
-    margin: 8,
-    alignItems: 'center',
-    borderRadius: 25,
-  },
-  addButton: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
   userLogo: {
     height: 100,
     width: 100,
@@ -171,5 +182,38 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#fff',
     fontSize: 12,
+  },
+  button: {
+    padding: 5,
+    marginHorizontal: 2,
+    margin: 8,
+    alignItems: 'center',
+    borderRadius: 25,
+  },
+  addButton: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  linkUser: {
+    flexDirection: 'row',
+    width: '80%',
+    marginBottom: 15,
+    justifyContent: 'space-between',
+  },
+  linkLogoff: {
+    color: '#F44336',
+  },
+  searchClean: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#12',
+    borderRadius: 25,
+    paddingHorizontal: 15,
+    height: 40,
+    marginLeft: 10,
+  },
+  searchCleanText: {
+    color: '#F44336',
+    marginLeft: 5,
   },
 })

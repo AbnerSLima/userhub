@@ -24,15 +24,29 @@ export default function Register(){
   return(
     <SafeAreaView>
       <View style={[styles.buttonExit, styles.addButton]}>
-        <Image
-            source={require('@/assets/images/logo2.png')}
-            style={styles.userLogo}
-        />
-        <Button
-        title="Voltar"
-        color={'#CC1100'}
-        onPress={homePage}
-        />
+        <View>
+          <Image
+              source={require('@/assets/images/logo2.png')}
+              style={styles.userLogo}
+          />
+        </View>
+        <View>
+          <View style={styles.linkUser}>
+            <Text>
+              Olá Visitante!
+            </Text>
+            <Link href="/login" asChild>
+                <Pressable>
+                  <Text style={styles.linkLogoff}>Sair</Text>
+                </Pressable>
+            </Link>
+          </View>
+          <Button
+            title="Voltar"
+            color={'#CC1100'}
+            onPress={homePage}
+          />
+        </View>
       </View>
       <View style={styles.container}>
         <Text style={styles.title}>Dados do usuário</Text>
@@ -100,10 +114,6 @@ const styles = StyleSheet.create({
     height: 100,
     width: 100,
   },
-  button: {
-    marginTop: 25,
-    alignItems: 'center',
-  },
   link: {
     width: '80%',
     marginTop: 20,
@@ -119,5 +129,21 @@ const styles = StyleSheet.create({
   addButton: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+  },
+  button: {
+    padding: 5,
+    marginHorizontal: 2,
+    margin: 8,
+    alignItems: 'center',
+    borderRadius: 25,
+  },
+  linkUser: {
+    flexDirection: 'row',
+    width: '80%',
+    marginBottom: 15,
+    justifyContent: 'space-between',
+  },
+  linkLogoff: {
+    color: '#F44336',
   },
 });
